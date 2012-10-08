@@ -1,7 +1,14 @@
 CouchGrams
 ==========
 
-N-grams in CouchDB
+N-grams and Markov chains in CouchDB
+
+Installation
+------------
+
+Use the [CouchApp](/couchapp/couchapp) utility as follows. 
+
+    couchapp push . http://localhost:5984/<your_db>
 
 API
 ---
