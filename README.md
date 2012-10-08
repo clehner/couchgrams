@@ -10,7 +10,7 @@ The corpus consists of the `text` property of all documents without an `ignore` 
 
 For a shortcut for adding text to the corpus,
 
-_POST_ `_design/couchgrams/post_update` with the text in the request body.
+_PUT_ `_design/couchgrams/add_update` with the text in the request body.
 
 To get a random n-gram given a prefix:
 
