@@ -1,0 +1,5 @@
+{
+	"name": "Couchgrams",
+	"description": "N-grams in CouchDB",
+	"index": "index.html"
+}

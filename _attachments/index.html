@@ -1,0 +1,29 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Couchgrams</title>
+	<script src="script.js"></script>
+	<link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+<form id="form">
+	<h1>N-gram Text Generator</h1>
+	<p>
+	Input: <input id="input-text">
+	N=<select id="grams">
+		<option>1</option>
+		<option>2</option>
+		<option selected="selected">3</option>
+	</select>
+	<input type="submit" value="Go">
+	<input type="button" value="Stop" id="stop-btn" disabled="disabled">
+	</p>
+
+	<div id="results"></div>
+</form>
+
+<script>init()</script>
+</body>
+</html>
