@@ -68,13 +68,16 @@ function getWords(start, wordCb) {
 	// keep getting next words from successive ngrams, max 100
 	var i = 0;
 	(function next(ngram) {
-		if (!ngram || stopped || i++ > 100) return;
-		wordCb(ngram[ngram.length-1]);
-		var nextPrefix = ngram.slice(1, n);
-		if (i == 1 || n == 1 || nextPrefix.some(Boolean)) {
-			// Stop at the end of a line
-			pickNgram(nextPrefix, n, next);
+		if (ngram && !stopped && i++ < 100) {
+			wordCb(ngram[ngram.length-1]);
+			var nextPrefix = ngram.slice(1, n);
+			if (i == 1 || n == 1 || nextPrefix.some(Boolean)) {
+				// Stop at the end of a line
+				pickNgram(nextPrefix, n, next);
+				return;
+			}
 		}
+		stop2();
 	}(startNgram));
 }
 
