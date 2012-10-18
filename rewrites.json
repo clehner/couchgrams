@@ -1,0 +1,37 @@
+[
+	{
+		"from": "",
+		"to": "index.html"
+	},
+	{
+		"from": "db",
+		"to": "../../"
+	},
+	{
+		"from": "db/*",
+		"to": "../../*"
+	},
+	{
+		"from": "karma/:id",
+		"to": "_list/karma_single/karma",
+		"query": {
+			"key": ":id",
+			"limit": "1"
+		}
+	},
+	{
+		"from": "karma",
+		"to": "_list/karma_all/karma",
+		"query": {
+			"group_level": "1"
+		}
+	},
+	{
+		"from": "",
+		"to": "index.html"
+	},
+	{
+		"from": "*",
+		"to": "*"
+	}
+]

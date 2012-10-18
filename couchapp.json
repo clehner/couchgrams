@@ -1,5 +1,5 @@
 {
 	"name": "Couchgrams",
-	"description": "N-grams in CouchDB",
-	"index": "index.html"
+	"description": "N-grams and karma in CouchDB",
+	"index": "_rewrite/"
 }
