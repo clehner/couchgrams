@@ -2,6 +2,13 @@ function(doc, req) {
 	if (!doc) doc = {
 		_id: req.id || (new Date()/1000).toString()
 	};
-	doc.text = req.body;
-	return [doc, "ok"];
+	try {
+		var params = JSON.parse(req.body);
+		doc.text = params.text;
+		doc.sender = params.sender;
+		doc.channel = params.channel;
+		return [doc, "ok"];
+	} catch(e) {
+		return [null, "fail"];
+	}
 }
