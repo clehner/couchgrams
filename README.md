@@ -50,4 +50,4 @@ This simple web app lets you generate text using n-grams from your corpus.
 Security
 --------
 
-Currently no document security is provided - any CouchDB user can edit the corpus. You may use [per-database security](http://wiki.apache.org/couchdb/Security_Features_Overview) to secure the corpus.
+Admins and users with the role `couchgrams` will be able to edit the corpus.
