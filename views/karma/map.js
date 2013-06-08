@@ -1,6 +1,5 @@
 function(doc) {
-	if (!doc.text || doc.ignore) return;
-	doc.text.split(/\s+/).forEach(function (word) {
+	function mapWord(word) {
 		var m = word.match(/(.*?)[(?:\+\+)(--)](.*)/);
 		var id = m && m[1];
 		if (!id) return;
@@ -10,5 +9,13 @@ function(doc) {
 		var minus = m && m[2].length;
 		var val = (plus - minus) / 2;
 		if (val) emit(id, val);
-	});
+	}
+
+	function mapMessage(msg) {
+		if (!msg.text || msg.ignore) return;
+		msg.text.split(/\s+/).forEach(mapWord);
+	}
+
+	mapMessage(doc);
+	if (doc.messages) doc.messages.forEach(mapMessage);
 }

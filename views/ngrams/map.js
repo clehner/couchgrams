@@ -1,16 +1,23 @@
-function blanks(n) {
-	return new Array(n).join(" ").split(" ");
-}
-
 function(doc) {
-	var n = 3;
-	if (!doc.text || doc.ignore) return;
-	doc.text.split(/\s*[\n\r]+\s*/).forEach(function (line) {
+	function blanks(n) {
+		return new Array(n).join(" ").split(" ");
+	}
+
+	function mapLine(line) {
 		if (!line) return;
+		var n = 3;
 		var words = blanks(n-1).concat(line.split(/\s+/), blanks(n));
 		for (var i = n; i < words.length; i++) {
 			var ngram = words.slice(i-n, i);
 			emit(ngram, null);
 		}
-	});
+	}
+
+	function mapMessage(msg) {
+		if (!msg.text || msg.ignore) return;
+		msg.text.split(/\s*[\n\r]+\s*/).forEach(mapLine);
+	}
+
+	mapMessage(doc);
+	if (doc.messages) doc.messages.forEach(mapMessage);
 }
