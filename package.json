@@ -1,0 +1,31 @@
+{
+  "name": "couchgrams",
+  "version": "1.0.0",
+  "description": "N-grams in CouchDB",
+  "main": "import_log.js",
+  "dependencies": {
+    "node-irssi-log-parser": "~0.1.0-dev",
+    "request": "~2.21.0"
+  },
+  "devDependencies": {},
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/clehner/couchgrams.git"
+  },
+  "keywords": [
+    "couchdb",
+    "irc",
+    "ngrams",
+    "markov",
+    "irssi"
+  ],
+  "author": "Charles Lehner",
+  "license": "BSD",
+  "readmeFilename": "README.md",
+  "bugs": {
+    "url": "https://github.com/clehner/couchgrams/issues"
+  }
+}

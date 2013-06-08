@@ -53,3 +53,21 @@ Security
 --------
 
 Admins and users with the role `couchgrams` will be able to edit the corpus.
+
+Importing Logs
+--------------
+
+There is a script included which lets you import IRC logs into the ngram corpus.
+Currently only the irssi log format is supported.
+The script `import_log.js` reads couchdb credentials from the same `.couchapprc`
+file in the current directory that couchapp/erica reads.
+
+```
+./import_log.js ~/irclogs/*/#*.log
+```
+
+Todo
+----
+
+* Move import script stuff into a separate directory from the couchapp
+

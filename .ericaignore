@@ -1,5 +1,6 @@
 [
   "node_modules$",
+  "import_log\.js$",
   ".*~$",
   "\\..*\\.swp$",
   "Session\\.vim"
