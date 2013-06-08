@@ -85,9 +85,50 @@ function encodeObject(arg) {
 	return encodeURIComponent(JSON.stringify(arg));
 }
 
+var meow = (location.hash.indexOf('meow') !== -1);
+
 function pickNgram(prefixWords, groupLevel, cb) {
+	var startkey = encodeObject(prefixWords.concat(""));
+	var endkey = encodeObject(prefixWords.concat({}));
+	if (meow) {
+		pickNgram3(prefixWords, groupLevel, startkey, endkey, cb);
+	} else {
+		pickNgram2(prefixWords, groupLevel, startkey, endkey, cb);
+	}
+}
+
+// Pick an ngram in one request. O(N)
+function pickNgram2(prefixWords, groupLevel, startkey, endkey, cb) {
+	// Have couchdb iterate through all the resulting rows and pick one
 	loadJSON("_list/pick_ngram/ngrams?nonempty&group_level=" + groupLevel +
-		"&startkey=" + encodeObject(prefixWords.concat("")) +
-		"&endkey=" + encodeObject(prefixWords.concat({})) +
+		"&startkey=" + startkey +
+		"&endkey=" + endkey +
 		"&nocache=" + Math.random().toString().substr(2), cb);
+}
+
+// Pick an ngram in two requests. O(N/4)
+function pickNgram3(prefixWords, groupLevel, startkey, endkey, cb) {
+	// Get max rows, pick a value from that, and then find that row
+	loadJSON("_view/ngrams?" +
+			"&startkey=" + startkey +
+			"&endkey=" + endkey, function (res) {
+		var max = res && res.rows && res.rows[0] && res.rows[0].value
+		var index = max * Math.random();
+
+		// Optimization: if the index is in the second half, reverse the
+		// query and we will iterate on average half as far
+		var descending = index > max/2;
+		if (descending) {
+			var tmp = startkey;
+			startkey = endkey;
+			endkey = tmp;
+			index = max - index;
+		}
+		console.log(max, index, descending);
+		loadJSON("_list/pick_ngram/ngrams?group_level=" + groupLevel +
+				"&descending=" + descending +
+				"&i=" + index +
+				"&startkey=" + startkey +
+				"&endkey=" + endkey, cb);
+	});
 }
