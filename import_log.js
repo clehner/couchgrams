@@ -55,7 +55,12 @@ parser.on('action', onAction);
 var chunkSize = 1000;
 
 function importLogFile(file, cb) {
-	var channel = file.match(/.*\/(.*?)(\.log)?$/)[1];
+	var m = file.match(/.*\/(.*?)(\.log|txt)?$/);
+	if (!m) {
+		console.error('Filename ' + file + ' does not end in .log or .txt');
+		return;
+	}
+	var channel = m[1];
 	messages = [];
 
 	console.log('Reading log for ' + channel);
